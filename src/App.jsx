@@ -6,6 +6,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import CountriesPage from "./pages/CountriesPage";
 import PackagesPage from "./pages/PackagesPage";
+import EnquiryPage from "./pages/EnquiryPage";
 
 function App() {
   return (
@@ -15,9 +16,8 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/countries" element={<CountriesPage />} />
           <Route path="/packages" element={<PackagesPage />} />
+          <Route path="/enquiries" element={<EnquiryPage />} />
 
-
-          
         </Routes>
       </Router>
     </>

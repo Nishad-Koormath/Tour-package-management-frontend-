@@ -37,7 +37,7 @@ function PackagesPage() {
         <p>No packags available</p>
       ) : (
         <div
-          sstyle={{
+          style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "20px",
