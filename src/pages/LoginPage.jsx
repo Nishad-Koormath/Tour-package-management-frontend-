@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosInstance from "../services/api";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/api/token/", {
+      const res = await axiosInstance.post("/token/", {
         username,
         password,
       });

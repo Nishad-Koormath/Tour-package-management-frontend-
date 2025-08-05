@@ -1,19 +1,28 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { enquiriesAPI } from "../services/enquiriesAPI";
 
-const EnquiryForm = ({ schedulId = null }) => {
+const EnquiryForm = ({ scheduleId = null }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
-    related_schedule: schedulId,
+    related_schedule: scheduleId,
   });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await submitEnquiry(formData);
+      await enquiriesAPI.create(formData);
       toast.success("Enquiry submitted successfully!");
       setFormData({
         name: "",
