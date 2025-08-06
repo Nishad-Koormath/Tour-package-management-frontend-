@@ -7,18 +7,25 @@ import LoginPage from "./pages/LoginPage";
 import CountriesPage from "./pages/CountriesPage";
 import PackagesPage from "./pages/PackagesPage";
 import EnquiryPage from "./pages/EnquiryPage";
+import PackageDetailPage from "./pages/PackageDetailPage";
+import ThankYou from "./pages/ThanksPage";
+import HomePage from "./pages/HomePage";
+import Navbar from "./componests/Navbar";
 
 function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/countries" element={<CountriesPage />} />
-          <Route path="/packages" element={<PackagesPage />} />
-          <Route path="/enquiries" element={<EnquiryPage />} />
-
-        </Routes>
+        <Navbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/countries" element={<CountriesPage />} />
+            <Route path="/packages" element={<PackagesPage />} />
+            <Route path="/enquiries" element={<EnquiryPage />} />
+            <Route path="/packages/:id" element={<PackageDetailPage />} />
+            <Route path="/thankyou" element={<ThankYou />} />
+          </Routes>
       </Router>
     </>
   );
