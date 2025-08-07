@@ -28,7 +28,7 @@ function CountriesPage() {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/countries/${selectedId}`);
+      await axiosInstance.delete(`/countries/${selectedId}/`);
       setCountries(countries.filter((c) => c.id !== selectedId));
       toast.success("Country deleted successfully!");
       setShowModal(false);
@@ -39,8 +39,7 @@ function CountriesPage() {
     }
   };
 
-  
-  console.log('isAdmin:',isAdmin())
+  console.log("isAdmin:", isAdmin());
 
   return (
     <div
@@ -78,10 +77,11 @@ function CountriesPage() {
         {isAdmin() && (
           <div className="d-flex justify-content-end mb-4">
             <button
-              className="btn btn-light fw-bold shadow-sm"
-              onClick={() => navigate("/admin/countries/add")}
+              className="add-country-btn"
+              onClick={() => navigate("/admin/add-country")}
             >
-              ➕ Add Country
+              <span className="btn-icon">➕</span>
+              <span className="btn-text">Add Country</span>
             </button>
           </div>
         )}
@@ -144,23 +144,25 @@ function CountriesPage() {
                     <p className="text-muted small mb-2">Travel Destination</p>
 
                     {isAdmin() && (
-                      <div className="text-end">
+                      <div className="d-flex justify-content-end gap-2 mt-3">
                         <button
-                          className="btn btn-outline-primary btn-sm me-2"
+                          className="action-btn edit-btn"
                           onClick={() =>
-                            navigate(`/admin/countries/edit/${country.id}`)
+                            navigate(`/admin/country/${country.id}/edit`)
                           }
                         >
-                          ✏️ Edit
+                          <span className="btn-icon">✏️</span>
+                          <span className="btn-text">Edit</span>
                         </button>
                         <button
                           onClick={() => {
                             setShowModal(true);
                             setSelectedId(country.id);
                           }}
-                          className="bg-danger text-white px-3 py-1 rounded"
+                          className="action-btn delete-btn"
                         >
-                          Delete
+                          <span className="btn-icon">🗑️</span>
+                          <span className="btn-text">Delete</span>
                         </button>
                       </div>
                     )}
@@ -173,24 +175,27 @@ function CountriesPage() {
 
         {/* Confirmation Modal */}
         {showModal && isAdmin() && (
-          <div className="fixed inset-0 d-flex align-items-center justify-content-center bg-black bg-opacity-50 z-50">
-            <div
-              className="bg-white p-4 rounded-xl shadow-md"
-              style={{ width: "300px" }}
-            >
-              <h5 className="mb-4">
-                Are you sure you want to delete this country?
-              </h5>
-              <div className="d-flex justify-content-end gap-2">
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Confirm Deletion</h5>
+              </div>
+              <div className="modal-body">
+                <p>
+                  Are you sure you want to delete this country? This action
+                  cannot be undone.
+                </p>
+              </div>
+              <div className="modal-footer">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="btn btn-secondary btn-sm"
+                  className="modal-btn cancel-btn"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className="btn btn-danger btn-sm"
+                  className="modal-btn confirm-btn"
                 >
                   Delete
                 </button>
@@ -205,6 +210,192 @@ function CountriesPage() {
           transform: translateY(-5px);
           box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
           transition: all 0.3s ease;
+        }
+
+        /* Add Country Button */
+        .add-country-btn {
+          background: linear-gradient(135deg, #28a745, #20c997);
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 25px;
+          font-weight: 600;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+          transition: all 0.3s ease;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        .add-country-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+          background: linear-gradient(135deg, #218838, #1abc9c);
+        }
+
+        .add-country-btn:active {
+          transform: translateY(0);
+        }
+
+        /* Action Buttons (Edit/Delete) */
+        .action-btn {
+          border: none;
+          padding: 8px 16px;
+          border-radius: 20px;
+          font-weight: 500;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          text-decoration: none;
+          min-width: 80px;
+          justify-content: center;
+        }
+
+        .edit-btn {
+          background: linear-gradient(135deg, #007bff, #0056b3);
+          color: white;
+          box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .edit-btn:hover {
+          background: linear-gradient(135deg, #0056b3, #004085);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+        }
+
+        .delete-btn {
+          background: linear-gradient(135deg, #dc3545, #c82333);
+          color: white;
+          box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+
+        .delete-btn:hover {
+          background: linear-gradient(135deg, #c82333, #bd2130);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        }
+
+        .action-btn:active {
+          transform: translateY(0);
+        }
+
+        .btn-icon {
+          display: inline-block;
+          font-size: 14px;
+        }
+
+        .btn-text {
+          font-weight: 600;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 1050;
+          backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+          background: white;
+          border-radius: 15px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          width: 90%;
+          max-width: 400px;
+          overflow: hidden;
+          transform: scale(1);
+          transition: all 0.3s ease;
+        }
+
+        .modal-header {
+          padding: 20px 24px 0;
+        }
+
+        .modal-title {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .modal-body {
+          padding: 16px 24px;
+          color: #666;
+          line-height: 1.5;
+        }
+
+        .modal-body p {
+          margin: 0;
+        }
+
+        .modal-footer {
+          padding: 0 24px 24px;
+          display: flex;
+          gap: 12px;
+          justify-content: flex-end;
+        }
+
+        .modal-btn {
+          border: none;
+          padding: 10px 20px;
+          border-radius: 8px;
+          font-weight: 500;
+          font-size: 14px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          min-width: 80px;
+        }
+
+        .cancel-btn {
+          background: #f8f9fa;
+          color: #6c757d;
+          border: 1px solid #dee2e6;
+        }
+
+        .cancel-btn:hover {
+          background: #e9ecef;
+          color: #495057;
+        }
+
+        .confirm-btn {
+          background: linear-gradient(135deg, #dc3545, #c82333);
+          color: white;
+          box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+
+        .confirm-btn:hover {
+          background: linear-gradient(135deg, #c82333, #bd2130);
+          box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .action-btn {
+            padding: 6px 12px;
+            font-size: 11px;
+            min-width: 70px;
+          }
+
+          .btn-text {
+            display: none;
+          }
+
+          .add-country-btn {
+            padding: 10px 20px;
+          }
         }
       `}</style>
     </div>
