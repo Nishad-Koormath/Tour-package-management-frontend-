@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./componests/Navbar";
 import AddCountryPage from "./pages/AddCountry";
 import EditCountry from "./pages/EditCountry.JSX";
+import CitiesPage from "./pages/CitiesPage";
 
 function App() {
   return (
@@ -28,8 +29,8 @@ function App() {
           <Route path="/packages/:id" element={<PackageDetailPage />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/admin/add-country" element={<AddCountryPage />} />
-          <Route path="admin/country/:id/edit" element={<EditCountry/>}/>
-
+          <Route path="admin/country/:id/edit" element={<EditCountry />} />
+          <Route path="/cities" element={<CitiesPage />} />
         </Routes>
       </Router>
     </>
