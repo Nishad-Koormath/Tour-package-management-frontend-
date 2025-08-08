@@ -6,7 +6,7 @@ const PackageCard = ({ pkg }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
       <img
-        src={pkg.cover_photo}
+        src={pkg.cover_photo }
         alt={pkg.title}
         className="w-full h-52 object-cover"
       />

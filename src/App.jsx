@@ -13,6 +13,11 @@ import HomePage from "./pages/HomePage";
 import Navbar from "./componests/Navbar";
 import AddCountryPage from "./pages/AddCountry";
 import EditCountry from "./pages/EditCountry.JSX";
+import CitiesPage from "./pages/CitiesPage";
+import AddCities from "./pages/AddCities";
+import EditCity from "./pages/EditCity";
+import AddPackage from "./pages/AddPackage";
+import PackageEditPage from "./pages/EditPackage";
 
 function App() {
   return (
@@ -28,8 +33,12 @@ function App() {
           <Route path="/packages/:id" element={<PackageDetailPage />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/admin/add-country" element={<AddCountryPage />} />
-          <Route path="admin/country/:id/edit" element={<EditCountry/>}/>
-
+          <Route path="admin/country/:id/edit" element={<EditCountry />} />
+          <Route path="/cities" element={<CitiesPage />} />
+          <Route path="/admin/add-cities" element={<AddCities />} />
+          <Route path="/admin/cities/edit/:id" element={<EditCity />} />
+          <Route path="/admin/packages/add" element={<AddPackage />} />
+          <Route path="/admin/packages/edit/:id" element={<PackageEditPage />} />
         </Routes>
       </Router>
     </>
