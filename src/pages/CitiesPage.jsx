@@ -28,7 +28,7 @@ function CitiesPage() {
 
   const confirmDelete = async () => {
     try {
-      await axiosInstance.delete(`/cities/${selectedId}/`);
+      await axiosInstance.delete(`/countries/cities/${selectedId}/`);
       setCities(cities.filter((c) => c.id !== selectedId));
       toast.success("City deleted successfully!");
       setShowModal(false);
@@ -77,7 +77,7 @@ function CitiesPage() {
           <div className="d-flex justify-content-end mb-4">
             <button
               className="add-city-btn"
-              onClick={() => navigate("/admin/add-city")}
+              onClick={() => navigate("/admin/add-cities")}
             >
               <span className="btn-icon">➕</span>
               <span className="btn-text">Add City</span>
@@ -150,7 +150,7 @@ function CitiesPage() {
                         <button
                           className="action-btn edit-btn"
                           onClick={() =>
-                            navigate(`/admin/city/${city.id}/edit`)
+                            navigate(`admin/cities/edit/${city.id}`)
                           }
                         >
                           <span className="btn-icon">✏️</span>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import publicAPI from "../services/publicAPI";
+import { isAdmin } from "../utils/auth";
 
 function PackagesPage() {
   const [packages, setPackages] = useState([]);
@@ -9,7 +10,6 @@ function PackagesPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     publicAPI
       .get("/packages/")
       .then((res) => {
@@ -97,6 +97,19 @@ function PackagesPage() {
           </div>
         </div>
 
+        {/* Add Package Button - Only visible to admins */}
+        {isAdmin() && (
+          <div className="d-flex justify-content-end mb-4">
+            <button
+              className="add-package-btn"
+              onClick={() => navigate("/admin/packages/add")}
+            >
+              <span className="btn-icon">➕</span>
+              <span className="btn-text">Add Package</span>
+            </button>
+          </div>
+        )}
+
         {/* Main Content */}
         {loading ? (
           <div className="row justify-content-center">
@@ -181,7 +194,7 @@ function PackagesPage() {
               <div key={pkg.id} className="col-lg-4 col-md-6">
                 <div
                   className="card border-0 h-100 package-card"
-                  onClick={()=>navigate(`/packages/${pkg.id}`)}
+                  onClick={() => navigate(`/packages/${pkg.id}`)}
                   style={{
                     background: "rgba(255, 255, 255, 0.95)",
                     borderRadius: "20px",
@@ -395,6 +408,43 @@ function PackagesPage() {
           background: rgba(255, 255, 255, 1);
         }
 
+        /* Add Package Button */
+        .add-package-btn {
+          background: linear-gradient(135deg, #28a745, #20c997);
+          border: none;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 25px;
+          font-weight: 600;
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+          transition: all 0.3s ease;
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        .add-package-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+          background: linear-gradient(135deg, #218838, #1abc9c);
+        }
+
+        .add-package-btn:active {
+          transform: translateY(0);
+        }
+
+        .btn-icon {
+          display: inline-block;
+          font-size: 14px;
+        }
+
+        .btn-text {
+          font-weight: 600;
+        }
+
         @keyframes fadeIn {
           from {
             opacity: 0;
@@ -449,6 +499,14 @@ function PackagesPage() {
 
           .col-lg-4 {
             margin-bottom: 1rem;
+          }
+
+          .add-package-btn {
+            padding: 10px 20px;
+          }
+
+          .btn-text {
+            display: none;
           }
         }
 
