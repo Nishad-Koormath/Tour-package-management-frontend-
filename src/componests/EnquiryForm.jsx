@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import publicAPI from "../services/publicAPI";
 
 const EnquiryForm = ({ scheduleId = null }) => {
+  console.log('schedulId:', scheduleId)
   const [formData, setFormData] = useState({
     name: "",
     email: "",

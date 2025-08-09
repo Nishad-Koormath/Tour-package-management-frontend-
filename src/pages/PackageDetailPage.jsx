@@ -41,6 +41,10 @@ function PackageDetailPage() {
     }
   };
 
+  useEffect(() => {
+    console.log("Package details:", pkg);
+  }, [pkg]);
+
   return (
     <div
       className="min-vh-100"
@@ -154,7 +158,6 @@ function PackageDetailPage() {
                   animation: "slideUpFadeIn 0.6s ease-out forwards",
                 }}
               >
-                {/* Header Section */}
                 <div
                   className="text-center text-white p-4"
                   style={{
@@ -206,14 +209,18 @@ function PackageDetailPage() {
                       border: "1px solid rgba(255, 255, 255, 0.3)",
                     }}
                   >
-                    <span className="fw-bold fs-4">₹{pkg.price}</span>
+                    <span className="fw-bold fs-4">
+                      ₹
+                      {pkg.schedules && pkg.schedules.length > 0
+                        ? pkg.schedules[0].amount
+                        : "N/A"}
+                    </span>
                   </div>
                 </div>
 
-                {/* Image Section */}
                 <div className="position-relative" style={{ height: "300px" }}>
                   <img
-                    src={pkg.image}
+                    src={pkg.photos}
                     alt={pkg.title}
                     className="w-100 h-100"
                     style={{
@@ -283,99 +290,28 @@ function PackageDetailPage() {
                     </p>
                   </div>
 
-                  {/* Package Details Grid */}
-                  <div className="row g-3 mb-4">
-                    <div className="col-md-4">
-                      <div
-                        className="p-3 rounded text-center h-100"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(102, 126, 234, 0.05))",
-                          border: "1px solid rgba(102, 126, 234, 0.2)",
-                        }}
-                      >
-                        <div className="mb-2">
-                          <span style={{ fontSize: "1.5rem" }}>📅</span>
-                        </div>
-                        <div className="fw-bold text-primary mb-1">
-                          {pkg.duration || "Flexible"}
-                        </div>
-                        <small className="text-muted">Duration</small>
+                  <div className="text-center mb-4">
+                    {pkg.schedules.map((schedule) => (
+                      <div key={schedule.id} className="mb-2">
+                        <button
+                          className="enquiry-btn"
+                          onClick={() =>
+                            navigate("/enquiry", {
+                              state: { scheduleId: schedule.id },
+                            })
+                          }
+                        >
+                          <span className="btn-icon">💬</span>
+                          <span className="btn-text">Make an Enquiry</span>
+                          <span className="btn-arrow">→</span>
+                        </button>
                       </div>
+                    ))}
+                    <div className="mt-2">
+                      <small className="text-muted">
+                        Get personalized quotes and instant support
+                      </small>
                     </div>
-                    <div className="col-md-4">
-                      <div
-                        className="p-3 rounded text-center h-100"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.05))",
-                          border: "1px solid rgba(40, 167, 69, 0.2)",
-                        }}
-                      >
-                        <div className="mb-2">
-                          <span style={{ fontSize: "1.5rem" }}>🏨</span>
-                        </div>
-                        <div className="fw-bold text-success mb-1">
-                          {pkg.hotels || "Included"}
-                        </div>
-                        <small className="text-muted">Accommodation</small>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div
-                        className="p-3 rounded text-center h-100"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05))",
-                          border: "1px solid rgba(220, 53, 69, 0.2)",
-                        }}
-                      >
-                        <div className="mb-2">
-                          <span style={{ fontSize: "1.5rem" }}>🎯</span>
-                        </div>
-                        <div className="fw-bold text-danger mb-1">
-                          {pkg.activities || "Various"}
-                        </div>
-                        <small className="text-muted">Activities</small>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Rating Section */}
-                  <div
-                    className="d-flex align-items-center justify-content-between p-3 rounded mb-4"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1))",
-                      border: "1px solid rgba(102, 126, 234, 0.2)",
-                    }}
-                  >
-                    <div className="d-flex align-items-center">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="me-2"
-                      >
-                        <polygon
-                          points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-                          stroke="#667eea"
-                          strokeWidth="2"
-                          fill="#667eea"
-                        />
-                      </svg>
-                      <div>
-                        <span className="fw-bold text-primary">
-                          Highly Rated Package
-                        </span>
-                        <div className="small text-muted">
-                          Based on customer reviews
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-warning fw-bold h5 mb-0">★ 4.8</div>
                   </div>
 
                   {/* Admin Actions */}
@@ -475,8 +411,111 @@ function PackageDetailPage() {
           }
         }
 
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.02);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            background-position: -200% 0;
+          }
+          100% {
+            background-position: 200% 0;
+          }
+        }
+
         .package-detail-card:hover img {
           transform: scale(1.05);
+        }
+
+        /* Enhanced Enquiry Button */
+        .enquiry-btn {
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          border: none;
+          color: white;
+          padding: 16px 32px;
+          border-radius: 30px;
+          font-weight: 700;
+          font-size: 16px;
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          cursor: pointer;
+          text-decoration: none;
+          position: relative;
+          overflow: hidden;
+          min-width: 220px;
+          justify-content: center;
+        }
+
+        .enquiry-btn::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+          );
+          background-size: 200% 100%;
+          animation: shimmer 2s infinite;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .enquiry-btn:hover {
+          transform: translateY(-4px) scale(1.05);
+          box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
+          background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+          animation: pulse 2s infinite;
+        }
+
+        .enquiry-btn:hover::before {
+          opacity: 1;
+        }
+
+        .enquiry-btn:active {
+          transform: translateY(-2px) scale(1.02);
+        }
+
+        .enquiry-btn .btn-icon {
+          font-size: 18px;
+          transition: transform 0.3s ease;
+        }
+
+        .enquiry-btn:hover .btn-icon {
+          transform: rotate(15deg) scale(1.1);
+        }
+
+        .enquiry-btn .btn-arrow {
+          font-size: 16px;
+          font-weight: bold;
+          transition: transform 0.3s ease;
+          opacity: 0.8;
+        }
+
+        .enquiry-btn:hover .btn-arrow {
+          transform: translateX(4px);
+          opacity: 1;
+        }
+
+        .enquiry-btn .btn-text {
+          font-weight: 700;
+          letter-spacing: 0.5px;
         }
 
         /* Back Button */
@@ -669,7 +708,7 @@ function PackageDetailPage() {
             font-size: 12px;
           }
 
-          .btn-text {
+          .back-btn .btn-text {
             display: none;
           }
 
@@ -680,6 +719,16 @@ function PackageDetailPage() {
 
           .admin-btn .btn-text {
             display: none;
+          }
+
+          .enquiry-btn {
+            padding: 14px 24px;
+            font-size: 14px;
+            min-width: 180px;
+          }
+
+          .enquiry-btn .btn-text {
+            font-size: 14px;
           }
 
           .h3 {
@@ -719,6 +768,23 @@ function PackageDetailPage() {
 
           .modal-btn:last-child {
             margin-bottom: 0;
+          }
+        }
+
+        /* Small screen adjustments for enquiry button */
+        @media (max-width: 480px) {
+          .enquiry-btn {
+            width: 100%;
+            max-width: 280px;
+            padding: 12px 20px;
+          }
+
+          .enquiry-btn .btn-icon {
+            font-size: 16px;
+          }
+
+          .enquiry-btn .btn-arrow {
+            font-size: 14px;
           }
         }
 

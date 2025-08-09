@@ -64,7 +64,7 @@ function AddPackage() {
     formDataObj.append("source_city", formData.source_city);
     formDataObj.append("destination_country", formData.destination_country);
     formDataObj.append("destination_city", formData.destination_city);
-    formDataObj.append('terms', formData.terms)
+    formDataObj.append("terms", formData.terms);
 
     if (formData.photos) {
       formDataObj.append("photos", formData.photos);
@@ -519,15 +519,6 @@ function AddPackage() {
           width: 3rem;
           height: 3rem;
           border-width: 0.3em;
-        }
-
-        /* Form Validation Styling */
-        .form-control:invalid {
-          border-color: #dc3545;
-        }
-
-        .form-control:valid {
-          border-color: #28a745;
         }
 
         /* Smooth Transitions */
