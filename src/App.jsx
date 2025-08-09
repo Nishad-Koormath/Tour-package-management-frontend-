@@ -18,6 +18,8 @@ import AddCities from "./pages/AddCities";
 import EditCity from "./pages/EditCity";
 import AddPackage from "./pages/AddPackage";
 import PackageEditPage from "./pages/EditPackage";
+import EnquiryListPage from "./pages/EnquiryListPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -27,9 +29,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/countries" element={<CountriesPage />} />
           <Route path="/packages" element={<PackagesPage />} />
-          <Route path="/enquiries" element={<EnquiryPage />} />
+          <Route path="/enquiry" element={<EnquiryPage />} />
           <Route path="/packages/:id" element={<PackageDetailPage />} />
           <Route path="/thankyou" element={<ThankYou />} />
           <Route path="/admin/add-country" element={<AddCountryPage />} />
@@ -38,7 +41,11 @@ function App() {
           <Route path="/admin/add-cities" element={<AddCities />} />
           <Route path="/admin/cities/edit/:id" element={<EditCity />} />
           <Route path="/admin/packages/add" element={<AddPackage />} />
-          <Route path="/admin/packages/edit/:id" element={<PackageEditPage />} />
+          <Route
+            path="/admin/packages/edit/:id"
+            element={<PackageEditPage />}
+          />
+          <Route path="admin/enquiries" element={<EnquiryListPage />} />
         </Routes>
       </Router>
     </>

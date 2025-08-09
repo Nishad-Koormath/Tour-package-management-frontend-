@@ -186,47 +186,6 @@ const ThankYou = () => {
                   </svg>
                   Browse More Packages
                 </Link>
-
-                <Link
-                  to="/enquiries"
-                  className="btn btn-outline-secondary btn-lg px-4 py-3 d-inline-flex align-items-center gap-2 text-decoration-none"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.7)",
-                    color: "#667eea",
-                    border: "2px solid rgba(102, 126, 234, 0.3)",
-                    borderRadius: "50px",
-                    fontWeight: "600",
-                    fontSize: "1rem",
-                    transition: "all 0.3s ease",
-                    minWidth: "200px",
-                    backdropFilter: "blur(10px)",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.background = "rgba(102, 126, 234, 0.1)";
-                    e.target.style.borderColor = "#667eea";
-                    e.target.style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.background = "rgba(255, 255, 255, 0.7)";
-                    e.target.style.borderColor = "rgba(102, 126, 234, 0.3)";
-                    e.target.style.transform = "translateY(0)";
-                  }}
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9 11H15M9 15H15M17 21L12 16L7 21V5C7 3.89 7.89 3 9 3H15C16.11 3 17 3.89 17 5V21Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                  View My Enquiries
-                </Link>
               </div>
 
               {/* Footer Note */}

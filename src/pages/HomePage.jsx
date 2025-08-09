@@ -22,6 +22,21 @@ function HomePage() {
     fetchPackages();
   }, []);
 
+  const myImages = [
+    {
+      src: "https://www.travelandleisure.com/thmb/ip03-TS_bwMVg8elPNZ8pKaEOO8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/mt-fuji-japan-MOSTBEAUTIFUL0921-413f7d67bb4f4539a336ebba14f74ed2.jpg",
+      title: "My Title 1",
+    },
+    {
+      src: "https://www.travelandleisure.com/thmb/p1Dh0uzZPUk8lQQq2oMhVMUQESk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/lofoten-islands-norway-MOSTBEAUTIFUL0921-cd0b88063a8b4a26871a51764db0fcae.jpg",
+      title: "My Title 2",
+    },
+    {
+      src: "https://hips.hearstapps.com/bestproducts/assets/17/23/1496678686-rainbow-mountains-china.jpg",
+      title: "My Title 3",
+    },
+  ];
+
   return (
     <div
       className="min-vh-100"
@@ -32,10 +47,7 @@ function HomePage() {
     >
       {/* Hero Section with Carousel */}
       <div className="position-relative">
-        <CarouselComponent />
-        
-        {/* Hero Overlay Content */}
-        
+        <CarouselComponent images={myImages} />
       </div>
 
       {/* Top Packages Section */}
@@ -136,11 +148,16 @@ function HomePage() {
                           borderRadius: "15px",
                           padding: "1.5rem",
                           backdropFilter: "blur(5px)",
-                          transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                          transition:
+                            "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                           animation: `fadeInUp 0.6s ease-out forwards`,
                           animationDelay: `${index * 0.2}s`,
                           opacity: 0,
+                          cursor: "pointer",
                         }}
+                        onClick={() =>
+                          (window.location.href = `/packages/${pkg.id}`)
+                        }
                       >
                         <PackageCard pkg={pkg} />
                       </div>
@@ -172,7 +189,8 @@ function HomePage() {
                     </div>
                     <h4 className="text-dark mb-3">No Packages Available</h4>
                     <p className="text-muted">
-                      We're working on bringing you amazing travel packages. Check back soon!
+                      We're working on bringing you amazing travel packages.
+                      Check back soon!
                     </p>
                   </div>
                 )}
@@ -198,7 +216,8 @@ function HomePage() {
                 onMouseEnter={(e) => {
                   e.target.style.background = "rgba(255, 255, 255, 0.3)";
                   e.target.style.transform = "translateY(-5px) scale(1.05)";
-                  e.target.style.boxShadow = "0 15px 35px rgba(255, 255, 255, 0.2)";
+                  e.target.style.boxShadow =
+                    "0 15px 35px rgba(255, 255, 255, 0.2)";
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.background = "rgba(255, 255, 255, 0.2)";
@@ -382,6 +401,18 @@ function HomePage() {
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
         }
 
+        .package-card {
+          position: relative;
+        }
+
+        .package-card * {
+          pointer-events: none;
+        }
+
+        .package-card a {
+          pointer-events: all;
+        }
+
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -426,7 +457,7 @@ function HomePage() {
         .position-relative .position-absolute {
           pointer-events: none;
         }
-        
+
         .position-relative .position-absolute .btn,
         .position-relative .position-absolute a {
           pointer-events: all;

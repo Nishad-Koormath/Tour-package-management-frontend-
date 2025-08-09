@@ -3,27 +3,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const CarouselComponent = () => {
-  const images = [
-    {
-      src: "/carousel/slide1.jpg",
-      title: "Discover Paradise",
-      subtitle: "Explore breathtaking destinations around the world",
-    },
-    {
-      src: "/carousel/slide2.jpg",
-      title: "Adventure Awaits",
-      subtitle: "Create unforgettable memories with our travel packages",
-    },
-    {
-      src: "/carousel/slide3.jpg",
-      title: "Journey Beyond",
-      subtitle: "Experience the beauty of nature and culture",
-    },
-  ];
-
+const CarouselComponent = ({ images }) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 800,
     slidesToShow: 1,
@@ -37,54 +19,59 @@ const CarouselComponent = () => {
     arrows: true,
   };
 
-  // Custom Arrow Components
+  // Custom Arrow Components with enhanced styling
   const CustomPrevArrow = ({ onClick }) => (
     <button
       onClick={onClick}
-      className="carousel-arrow carousel-prev"
+      className="carousel-arrow carousel-prev group"
       style={{
         position: "absolute",
-        left: "20px",
+        left: "24px",
         top: "50%",
         transform: "translateY(-50%)",
         zIndex: 20,
-        background: "rgba(255, 255, 255, 0.2)",
-        border: "1px solid rgba(255, 255, 255, 0.3)",
+        background: "rgba(0, 0, 0, 0.4)",
+        border: "2px solid rgba(255, 255, 255, 0.2)",
         borderRadius: "50%",
-        width: "60px",
-        height: "60px",
+        width: "56px",
+        height: "56px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
-        fontSize: "20px",
         cursor: "pointer",
-        backdropFilter: "blur(10px)",
-        transition: "all 0.3s ease",
-        boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)",
+        backdropFilter: "blur(12px)",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+        opacity: 0.85,
       }}
       onMouseEnter={(e) => {
-        e.target.style.background = "rgba(255, 255, 255, 0.3)";
-        e.target.style.transform = "translateY(-50%) scale(1.1)";
-        e.target.style.boxShadow = "0 12px 35px rgba(0, 0, 0, 0.2)";
+        e.target.style.background = "rgba(0, 0, 0, 0.7)";
+        e.target.style.transform = "translateY(-50%) scale(1.15)";
+        e.target.style.boxShadow = "0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
+        e.target.style.opacity = "1";
+        e.target.style.borderColor = "rgba(255, 255, 255, 0.4)";
       }}
       onMouseLeave={(e) => {
-        e.target.style.background = "rgba(255, 255, 255, 0.2)";
+        e.target.style.background = "rgba(0, 0, 0, 0.4)";
         e.target.style.transform = "translateY(-50%) scale(1)";
-        e.target.style.boxShadow = "0 8px 25px rgba(0, 0, 0, 0.15)";
+        e.target.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+        e.target.style.opacity = "0.85";
+        e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
       }}
     >
       <svg
-        width="24"
-        height="24"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        style={{ filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))" }}
       >
         <path
           d="M15 18L9 12L15 6"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -95,50 +82,55 @@ const CarouselComponent = () => {
   const CustomNextArrow = ({ onClick }) => (
     <button
       onClick={onClick}
-      className="carousel-arrow carousel-next"
+      className="carousel-arrow carousel-next group"
       style={{
         position: "absolute",
-        right: "20px",
+        right: "24px",
         top: "50%",
         transform: "translateY(-50%)",
         zIndex: 20,
-        background: "rgba(255, 255, 255, 0.2)",
-        border: "1px solid rgba(255, 255, 255, 0.3)",
+        background: "rgba(0, 0, 0, 0.4)",
+        border: "2px solid rgba(255, 255, 255, 0.2)",
         borderRadius: "50%",
-        width: "60px",
-        height: "60px",
+        width: "56px",
+        height: "56px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         color: "white",
-        fontSize: "20px",
         cursor: "pointer",
-        backdropFilter: "blur(10px)",
-        transition: "all 0.3s ease",
-        boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)",
+        backdropFilter: "blur(12px)",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+        opacity: 0.85,
       }}
       onMouseEnter={(e) => {
-        e.target.style.background = "rgba(255, 255, 255, 0.3)";
-        e.target.style.transform = "translateY(-50%) scale(1.1)";
-        e.target.style.boxShadow = "0 12px 35px rgba(0, 0, 0, 0.2)";
+        e.target.style.background = "rgba(0, 0, 0, 0.7)";
+        e.target.style.transform = "translateY(-50%) scale(1.15)";
+        e.target.style.boxShadow = "0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)";
+        e.target.style.opacity = "1";
+        e.target.style.borderColor = "rgba(255, 255, 255, 0.4)";
       }}
       onMouseLeave={(e) => {
-        e.target.style.background = "rgba(255, 255, 255, 0.2)";
+        e.target.style.background = "rgba(0, 0, 0, 0.4)";
         e.target.style.transform = "translateY(-50%) scale(1)";
-        e.target.style.boxShadow = "0 8px 25px rgba(0, 0, 0, 0.15)";
+        e.target.style.boxShadow = "0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+        e.target.style.opacity = "0.85";
+        e.target.style.borderColor = "rgba(255, 255, 255, 0.2)";
       }}
     >
       <svg
-        width="24"
-        height="24"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        style={{ filter: "drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))" }}
       >
         <path
           d="M9 18L15 12L9 6"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -153,281 +145,147 @@ const CarouselComponent = () => {
   };
 
   return (
-    <div className="carousel-container">
-      <div
-        className="carousel-wrapper"
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "70vh",
-          minHeight: "500px",
-          maxHeight: "800px",
-          overflow: "hidden",
-          borderRadius: "0 0 30px 30px",
-          boxShadow: "0 15px 50px rgba(0, 0, 0, 0.2)",
-        }}
-      >
-        <Slider {...settingsWithCustomArrows} className="styled-slider">
-          {images.map((slide, index) => (
-            <div key={index} className="slide-wrapper">
-              <div
-                className="slide-content"
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  height: "70vh",
-                  minHeight: "500px",
-                  maxHeight: "800px",
-                }}
-              >
-                <img
-                  src={slide.src}
-                  alt={`Slide ${index + 1}`}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                  onError={(e) => {
-                    // Fallback gradient background if image fails to load
-                    e.target.style.display = "none";
-                    e.target.parentElement.style.background = `linear-gradient(135deg, ${
-                      index % 3 === 0
-                        ? "#667eea, #764ba2"
-                        : index % 3 === 1
-                        ? "#43e97b, #38f9d7"
-                        : "#f093fb, #f5576c"
-                    })`;
-                  }}
-                />
-
-                {/* Gradient Overlay */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background:
-                      "linear-gradient(45deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)",
-                    zIndex: 1,
-                  }}
-                />
-
-                {/* Text Content */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "80px",
-                    left: "50px",
-                    right: "50px",
-                    zIndex: 2,
-                    color: "white",
-                    textAlign: "left",
-                  }}
-                  className="slide-text"
-                >
-                  <div
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      backdropFilter: "blur(20px)",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      borderRadius: "20px",
-                      padding: "2rem",
-                      maxWidth: "600px",
-                      boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
-                    }}
-                  >
-                    <h2
-                      style={{
-                        fontSize: "3rem",
-                        fontWeight: "bold",
-                        marginBottom: "1rem",
-                        textShadow: "0 4px 8px rgba(0,0,0,0.3)",
-                        fontFamily: '"Roboto", sans-serif',
-                        animation: `slideInUp 1s ease-out ${index * 0.2}s both`,
-                      }}
-                    >
-                      {slide.title}
-                    </h2>
-                    <p
-                      style={{
-                        fontSize: "1.2rem",
-                        opacity: 0.9,
-                        lineHeight: 1.6,
-                        margin: 0,
-                        fontFamily: '"Roboto", sans-serif',
-                        animation: `slideInUp 1s ease-out ${
-                          index * 0.2 + 0.2
-                        }s both`,
-                      }}
-                    >
-                      {slide.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div>
-
-      {/* Custom Styles */}
+    <div className="carousel-container relative overflow-hidden rounded-2xl shadow-2xl">
       <style jsx>{`
         .carousel-container {
           position: relative;
-          width: 100%;
-          font-family: "Roboto", sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-
-        .styled-slider {
-          height: 100%;
-        }
-
-        .styled-slider .slick-dots {
-          bottom: 30px;
-          z-index: 10;
-        }
-
-        .styled-slider .slick-dots li button:before {
-          font-size: 12px;
-          color: rgba(255, 255, 255, 0.7);
-          opacity: 1;
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          border: 2px solid rgba(255, 255, 255, 0.7);
-          background: transparent;
-          content: "";
-          transition: all 0.3s ease;
-        }
-
-        .styled-slider .slick-dots li.slick-active button:before {
-          color: white;
-          background: linear-gradient(135deg, #43e97b, #38f9d7);
-          border-color: white;
-          transform: scale(1.2);
-          box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
-        }
-
-        .styled-slider .slick-dots li:hover button:before {
-          transform: scale(1.1);
-          border-color: white;
-        }
-
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        .slide-wrapper {
-          animation: fadeIn 0.8s ease-in-out;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-          .carousel-wrapper {
-            height: 50vh !important;
-            min-height: 400px !important;
-            border-radius: 0 0 20px 20px;
-          }
-
-          .slide-content {
-            height: 50vh !important;
-            min-height: 400px !important;
-          }
-
-          .slide-text {
-            bottom: 40px !important;
-            left: 20px !important;
-            right: 20px !important;
-          }
-
-          .slide-text div {
-            padding: 1.5rem !important;
-            border-radius: 15px !important;
-          }
-
-          .slide-text h2 {
-            font-size: 2rem !important;
-            margin-bottom: 0.75rem !important;
-          }
-
-          .slide-text p {
-            font-size: 1rem !important;
-          }
-
-          .carousel-arrow {
-            width: 45px !important;
-            height: 45px !important;
-          }
-
-          .carousel-prev {
-            left: 15px !important;
-          }
-
-          .carousel-next {
-            right: 15px !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .carousel-wrapper {
-            height: 45vh !important;
-            min-height: 350px !important;
-          }
-
-          .slide-content {
-            height: 45vh !important;
-            min-height: 350px !important;
-          }
-
-          .slide-text {
-            bottom: 30px !important;
-            left: 15px !important;
-            right: 15px !important;
-          }
-
-          .slide-text h2 {
-            font-size: 1.5rem !important;
-          }
-
-          .carousel-arrow {
-            width: 40px !important;
-            height: 40px !important;
-          }
-        }
-
-        /* Loading animation */
+        
         .carousel-container::before {
-          content: "";
+          content: '';
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          z-index: -1;
-          border-radius: 0 0 30px 30px;
+          background: linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.1) 100%
+          );
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .carousel-container .slick-slide {
+          position: relative;
+        }
+
+        .carousel-container .slick-slide img {
+          width: 100%;
+          height: 350px;
+          object-fit: cover;
+          border-radius: 0;
+          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-container:hover .slick-slide img {
+          transform: scale(1.05);
+        }
+
+        .carousel-container .slick-slide::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.05) 50%,
+            rgba(0, 0, 0, 0.3) 100%
+          );
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .carousel-container .custom-dots {
+          bottom: 25px !important;
+          z-index: 10;
+        }
+
+        .carousel-container .custom-dots li {
+          width: 12px;
+          height: 12px;
+          margin: 0 8px;
+        }
+
+        .carousel-container .custom-dots li button {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          border: 2px solid rgba(255, 255, 255, 0.6);
+          padding: 0;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          backdrop-filter: blur(8px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .carousel-container .custom-dots li button:hover {
+          background: rgba(255, 255, 255, 0.7);
+          transform: scale(1.3);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .carousel-container .custom-dots li.slick-active button {
+          background: rgba(255, 255, 255, 0.95);
+          border-color: rgba(255, 255, 255, 0.9);
+          transform: scale(1.4);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .carousel-container .custom-dots li button:before {
+          display: none;
+        }
+
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 768px) {
+          .carousel-container .slick-slide img {
+            height: 250px;
+          }
+          
+          .carousel-arrow {
+            width: 48px !important;
+            height: 48px !important;
+          }
+          
+          .carousel-prev {
+            left: 16px !important;
+          }
+          
+          .carousel-next {
+            right: 16px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .carousel-container .slick-slide img {
+            height: 200px;
+          }
+          
+          .carousel-arrow {
+            width: 40px !important;
+            height: 40px !important;
+          }
         }
       `}</style>
+      
+      <Slider {...settingsWithCustomArrows}>
+        {images.map((slide, index) => (
+          <div key={index} className="relative">
+            <img 
+              src={slide.src} 
+              alt={slide.title || `Slide ${index + 1}`} 
+              loading={index === 0 ? "eager" : "lazy"}
+              className="select-none"
+            />
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };

@@ -1,6 +1,10 @@
+import { useLocation } from "react-router-dom";
 import EnquiryForm from "../componests/EnquiryForm";
 
 function EnquiryPage() {
+  const location = useLocation();
+  const scheduleId = location.state?.scheduleId;
+
   return (
     <div
       className="min-vh-100 d-flex align-items-center"
@@ -156,7 +160,7 @@ function EnquiryPage() {
         {/* Form Section */}
         <div className="row justify-content-center">
           <div className="col-lg-8 col-xl-6">
-            <EnquiryForm />
+            <EnquiryForm scheduleId={scheduleId} />
           </div>
         </div>
 
@@ -276,10 +280,6 @@ function EnquiryPage() {
             opacity: 1;
             transform: translateY(0);
           }
-        }
-
-        .container > * {
-          animation: fadeInUp 0.8s ease-out forwards;
         }
 
         @media (max-width: 768px) {
